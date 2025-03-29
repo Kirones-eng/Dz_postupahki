@@ -1,0 +1,9 @@
+Flask
+joblib
+numpy
+scikit-learn
+uvicorn
+mlflow
+apache-airflow
+pandas
+logging

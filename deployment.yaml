@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wine-quality-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wine-quality-app
+  template:
+    metadata:
+      labels:
+        app: wine-quality-app
+    spec:
+      containers:
+      - name: wine-quality-app
+        image: kap31/wine-quality-app:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: ML_FLASK_ENV
+          value: 'http://localhost:5000'
