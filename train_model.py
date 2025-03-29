@@ -68,7 +68,6 @@ def promote_best_model(model_name="WineApp"):
     best_accuracy = 0
     best_version = None
 
-    # Поиск всех версий модели
     for version in client.search_model_versions(f"name='{model_name}'"):
         acc_tag = version.tags.get("accuracy")
         if acc_tag:
@@ -85,13 +84,11 @@ def promote_best_model(model_name="WineApp"):
             stage="Production"
         )
         print(
-            f"Promoted model {model_name} version {best_version.version} to Production with accuracy {best_accuracy:.3f}")
-    else:
-        print("No suitable model version found for promotion")
+            f"Promoted model {model_name} version {best_version.version} to Production with accuracy {best_accuracy:.2f}")
+    
 
 
 if __name__ == "__main__":
-    # Тестирование различных параметров
     params = [
         {"n_estimators": 100, "max_depth": 5},
         {"n_estimators": 200, "max_depth": None},
