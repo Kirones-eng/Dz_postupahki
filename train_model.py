@@ -12,29 +12,20 @@ mlflow.set_experiment("Wine_Quality_Classification")
 
 
 def train_and_log_model(n_estimators, max_depth):
-
     wine = load_wine()
     X = wine.data
     y = wine.target
 
-
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
-
-
     X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
-
     with mlflow.start_run():
-
         mlflow.log_param("n_estimators", n_estimators)
         mlflow.log_param("max_depth", max_depth)
-
-
         model = RandomForestClassifier(n_estimators=n_estimators,
                                        max_depth=max_depth,
                                        random_state=42)
         model.fit(X_train, y_train)
-
 
         y_pred = model.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
@@ -84,7 +75,7 @@ def promote_best_model(model_name="WineApp"):
             stage="Production"
         )
         print(
-            f"Promoted model {model_name} version {best_version.version} to Production with accuracy {best_accuracy:.2f}")
+            f" model {model_name} version {best_version.version} toproduction with accuracy {best_accuracy:.2f}")
     
 
 
